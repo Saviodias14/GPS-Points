@@ -6,9 +6,8 @@ function fakeHex(min: number, max: number, length?: number) {
     return faker.number.hex({ min, max })
 }
 
-export function createHex() {
+export function createHex(device_id: string) {
     const header = '50F7'
-    const deviceId = '0A3F73'
     const localizationType = '02'
     const pingType = '01'
     const gpsDate = () => {
@@ -17,7 +16,7 @@ export function createHex() {
         const hexDate = dateInSeconds.toString(16).padStart(8, '0')
         return hexDate
     }
-    const direction = fakeHex(0, 360, 4)
+    const direction = fakeHex(0, 35999, 4)
     const distance = fakeHex(0, 100000, 8)
     const time = fakeHex(0, 100000000, 8)
     const valuesComposition = () => {
@@ -30,7 +29,7 @@ export function createHex() {
     const longitude = fakeHex(-180000000, 180000000, 8).replace('-', 'F')
     const footer = '73C4'
 
-    const localizationMessage = (header + deviceId + localizationType + gpsDate() +
+    const localizationMessage = (header + device_id + localizationType + gpsDate() +
         direction + distance + time + valuesComposition() +
         speed + latitude + longitude + footer)
 

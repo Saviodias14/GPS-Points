@@ -8,8 +8,19 @@ app.listen(port, () => {
 const server = net.createServer((socket) => {
     console.log("Tracker conected")
     socket.on('data', data => {
-        lastMessage.message = data.toString()
-        console.log(lastMessage)
+        let existIdObject = false
+        const message = data.toString()
+        const id = message.slice(4, 10)
+        for (let i = 0; i < lastMessage.length; i++) {
+            if (lastMessage[i].id === id) {
+                existIdObject = true
+                lastMessage[i].message = message
+                break
+            }
+        }
+        if (!existIdObject) {
+            lastMessage.push({ id, message })
+        }
     })
 })
 server.listen(serverPort, serverHost, () => {
