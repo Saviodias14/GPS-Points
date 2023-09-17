@@ -20,13 +20,14 @@ export function createHex(device_id: string) {
     const distance = fakeHex(0, 100000, 8)
     const time = fakeHex(0, 100000000, 8)
     const valuesComposition = () => {
-        const binary = faker.number.binary({ min: 0, max: 32 }) + '00000000000'
-        const binaryToHex = parseInt(binary).toString(16).padStart(4, '0')
+        const binary = (faker.number.binary({ min: 0, max: 32 })).toString() + '00000000000'
+        const decimal = parseInt(binary, 2)
+        const binaryToHex = decimal.toString(16).padStart(4, '0')
         return binaryToHex
     }
     const speed = fakeHex(0, 16 ** 2, 2)
-    const latitude = fakeHex(-90000000, 90000000, 8).replace('-', 'F')
-    const longitude = fakeHex(-180000000, 180000000, 8).replace('-', 'F')
+    const latitude = fakeHex(0, 90000000, 8)
+    const longitude = fakeHex(0, 180000000, 8)
     const footer = '73C4'
 
     const localizationMessage = (header + device_id + localizationType + gpsDate() +

@@ -4,7 +4,7 @@ export type Location = {
     direction?: number,
     distance?: number,
     time?: number,
-    ValuesComposition?:string,
+    valuesComposition?:string[],
     speed?: number,
     latitude?: number,
     longitude?: number
