@@ -1,5 +1,5 @@
-import { authValidation } from "../middleware/authentication";
-import { createToken, getLocation } from "../controller/location";
+import { authValidation } from "@/middleware/authentication";
+import { createToken, getLocation } from "@/controller/location";
 import { Router } from "express";
 
 const locationRouter = Router()

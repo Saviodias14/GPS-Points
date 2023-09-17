@@ -1,5 +1,5 @@
-import * as locationRepository from '../repository/location'
-import { createInfo } from '../middleware/createInfo'
+import * as locationRepository from '@/repository/location'
+import { createInfo } from '@/middleware/createInfo'
 
 export function getLocation(device_id: string) {
     const message = locationRepository.findDeviceId(device_id)

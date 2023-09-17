@@ -1,4 +1,4 @@
-import { Location } from "../protocols"
+import { Location } from "@/protocols"
 import { valuesCompositionArray } from "./valuesComposition"
 
 function tranformToDecimal(message: string, start: number, end: number) {

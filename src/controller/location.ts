@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import * as serviceLocation from '../service/location'
-import { usersList } from "../constants/users";
-import { createJwt } from "../middleware/createJwt";
+import * as serviceLocation from '@/service/location'
+import { usersList } from "@/constants/users";
+import { createJwt } from "@/middleware/createJwt";
 
 
 export function getLocation(req: Request, res: Response) {
