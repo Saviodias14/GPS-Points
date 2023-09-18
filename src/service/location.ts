@@ -12,5 +12,5 @@ export async function getLocation(device_id: string, userId: number) {
     if (header !== '50F7' || footer !== '73C4') throw new Error('This message is not valid')
 
     const location = createInfo(hex_location, device_id)
-    return { location, hex_location }
+    return { location }
 }

@@ -12,9 +12,9 @@ client.connect(serverPort, serverHost, () => {
         for (let i = 0; i < usersList.length; i++) {
             const message = createHex(usersList[i].device_id, '50F7', '73C4')
             client.write(message)
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
-    }, (800 * usersList.length));
+    }, (200 * usersList.length));
 
 })
 //client.on('data', (data) => {

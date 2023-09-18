@@ -1,6 +1,6 @@
 import app, { init } from "./app";
 import net from 'net'
-import { lastMessage, port, serverHost, serverPort } from "./constants/serverInformation";
+import { port, serverHost, serverPort } from "./constants/serverInformation";
 import { usersList } from "./constants/users";
 import { prisma } from "./database";
 

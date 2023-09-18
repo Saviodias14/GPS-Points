@@ -20,7 +20,7 @@ describe('Location data processing tests', () => {
         }
     })
 
-    it('Should not pass if the device_id not exist', async () => {
+    it('Should not pass if the device_id does not exist', async () => {
         repositoryFunctionsResponse({ device_id: fakeDeviceId }, undefined)
 
         try {
@@ -58,7 +58,7 @@ describe('Location data processing tests', () => {
 
         repositoryFunctionsResponse({ device_id: device_id }, { hex_location: hexMessage.hex_location })
         const result = await getLocation(device_id, userId)
-        expect(result).toEqual(hexMessage);
+        expect(result).toEqual(hexMessage.location);
     })
 
 })
