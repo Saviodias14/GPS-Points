@@ -21,6 +21,7 @@ const server = net.createServer((socket) => {
         if (!existIdObject) {
             lastMessage.push({ id, message })
         }
+        socket.write('olá')
     })
 })
 server.listen(serverPort, serverHost, () => {

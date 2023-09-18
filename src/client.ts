@@ -11,13 +11,16 @@ client.connect(serverPort, serverHost, () => {
     console.log('Se conectou')
     setInterval(async () => {
         for (let i = 0; i < usersList.length; i++) {
-            const message = createHex(usersList[i].device_id)
+            const message = createHex(usersList[i].device_id, '50F7', '73C4')
             client.write(message)
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 500));
         }
-    }, 15000);
+    }, 8000);
 
 })
+//client.on('data', (data) => {
+//    console.log(data.toString())
+//})
 
 
 

@@ -11,7 +11,7 @@ export function createInfo(message: string, device_id: string) {
 
     location.date = tranformToDecimal(message, 12, 20)
 
-    location.direction = tranformToDecimal(message, 20, 24) / 100
+    location.direction = parseFloat((tranformToDecimal(message, 20, 24) / 100).toFixed(2))
 
     location.distance = tranformToDecimal(message, 24, 32)
 
@@ -22,18 +22,17 @@ export function createInfo(message: string, device_id: string) {
 
     location.speed = tranformToDecimal(message, 44, 46);
 
-    if (location.valuesComposition[3] === 'Latitude negativa') {
-        location.latitude = -tranformToDecimal(message, 46, 54) / 1000000
+    if (valuesComposition[3] === '1') {
+        location.latitude = -1 * parseFloat((tranformToDecimal(message, 46, 54) / 1000000).toFixed(6))
     } else {
-        location.latitude = tranformToDecimal(message, 46, 54) / 1000000
+        location.latitude = parseFloat((tranformToDecimal(message, 46, 54) / 1000000).toFixed(6))
     }
 
 
-    if (location.valuesComposition[4] === 'Longitude negativa') {
-        location.longitude = -tranformToDecimal(message, 54, 62) / 1000000
+    if (valuesComposition[4] === '1') {
+        location.longitude = -1 * parseFloat((tranformToDecimal(message, 54, 62) / 1000000).toFixed(6))
     } else {
-        location.longitude = tranformToDecimal(message, 54, 62) / 1000000
+        location.longitude = parseFloat((tranformToDecimal(message, 54, 62) / 1000000).toFixed(6))
     }
-
     return location
 }

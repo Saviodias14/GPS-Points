@@ -1,4 +1,4 @@
-import { lastMessage } from "@/constants/serverInformation";
+import { lastMessage } from "../constants/serverInformation";
 
 
 export function findDeviceId(device_id: string) {
