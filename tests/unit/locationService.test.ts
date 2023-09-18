@@ -1,32 +1,28 @@
-
-import * as locationRepository from '../../src/repository/location'
-import { jest } from '@jest/globals'
 import { faker } from '@faker-js/faker'
 import { getLocation } from '../../src/service/location'
 import { createHex } from '../../src/constants/genarateHexadecimal'
 import { createHexKnown } from '../factories/createHexKnown'
+import { repositoryFunctionsResponse } from '../factories/repositoryFunctions'
 
 describe('Location data processing tests', () => {
 
     const fakeDeviceId = faker.number.hex().padStart(8, '0')
+    const fakeUserId = faker.number.int()
     it('Should not pass if the device_id not exist', () => {
-        jest.spyOn(locationRepository, 'findDeviceId').mockImplementationOnce((): any => {
-            return undefined
-        })
-        const result = () => getLocation(fakeDeviceId)
+        repositoryFunctionsResponse(fakeDeviceId, undefined)
+        const result = () => getLocation(fakeDeviceId, fakeUserId)
         expect(result).toThrowError('Device not found');
     })
     it('Should not pass if header or footer are wrong', () => {
         const hexMessage = createHex(fakeDeviceId, '0000', '0000')
 
-        jest.spyOn(locationRepository, 'findDeviceId').mockImplementationOnce((): any => {
-            return hexMessage
-        })
-        const result = () => getLocation(fakeDeviceId)
+        repositoryFunctionsResponse(fakeDeviceId, hexMessage)
+        const result = () => getLocation(fakeDeviceId, fakeUserId)
         expect(result).toThrowError('This message is not valid');
     })
 
     it('Should return the message decrypted', () => {
+        const userId = 1
         const device_id = 'AAAAAA'
         const date = Math.floor(new Date().getTime() / 1000)
         const direction = 45.00
@@ -40,10 +36,8 @@ describe('Location data processing tests', () => {
         const hexMessage = createHexKnown(device_id, date, direction, distance, time, valuesComposition,
             speed, latitude, longitude)
 
-        jest.spyOn(locationRepository, 'findDeviceId').mockImplementationOnce((): any => {
-            return hexMessage.message
-        })
-        const result = getLocation(device_id)
+        repositoryFunctionsResponse(device_id, hexMessage.message)
+        const result = getLocation(device_id, userId)
         console.log(result)
         console.log(JSON.stringify(hexMessage))
         expect(result).toEqual(hexMessage);
