@@ -8,30 +8,40 @@ describe('Location data processing tests', () => {
 
     const fakeDeviceId = faker.number.hex().padStart(8, '0')
     const fakeUserId = faker.number.int()
-    it('Should not pass if user is not the owner', () => {
+    it('Should not pass if user is not the owner', async () => {
         const userDevice = faker.number.hex().padStart(8, '0')
         const hexMessage = createHex(fakeDeviceId, '50F7', '73C4')
 
-        repositoryFunctionsResponse(userDevice, hexMessage)
-        const result = () => getLocation(fakeDeviceId, fakeUserId)
-        expect(result).toThrowError('Unauthorized');
+        repositoryFunctionsResponse({ device_id: userDevice }, { hex_location: hexMessage })
+        try {
+            await getLocation(fakeDeviceId, fakeUserId)
+        } catch (err) {
+            expect(err.message).toEqual('Unauthorized');
+        }
     })
 
-    it('Should not pass if the device_id not exist', () => {
-        repositoryFunctionsResponse(fakeDeviceId, undefined)
-        const result = () => getLocation(fakeDeviceId, fakeUserId)
-        expect(result).toThrowError('Device not found');
+    it('Should not pass if the device_id not exist', async () => {
+        repositoryFunctionsResponse({ device_id: fakeDeviceId }, undefined)
+
+        try {
+            await getLocation(fakeDeviceId, fakeUserId)
+        } catch (err) {
+            expect(err.message).toEqual('Device not found');
+        }
     })
 
-    it('Should not pass if header or footer are wrong', () => {
+    it('Should not pass if header or footer are wrong', async () => {
         const hexMessage = createHex(fakeDeviceId, '0000', '0000')
 
-        repositoryFunctionsResponse(fakeDeviceId, hexMessage)
-        const result = () => getLocation(fakeDeviceId, fakeUserId)
-        expect(result).toThrowError('This message is not valid');
+        repositoryFunctionsResponse({ device_id: fakeDeviceId }, { hex_location: hexMessage })
+        try {
+            await getLocation(fakeDeviceId, fakeUserId)
+        } catch (err) {
+            expect(err.message).toEqual('This message is not valid');
+        }
     })
 
-    it('Should return the message decrypted', () => {
+    it('Should return the message decrypted', async () => {
         const userId = 1
         const device_id = 'AAAAAA'
         const date = Math.floor(new Date().getTime() / 1000)
@@ -46,10 +56,8 @@ describe('Location data processing tests', () => {
         const hexMessage = createHexKnown(device_id, date, direction, distance, time, valuesComposition,
             speed, latitude, longitude)
 
-        repositoryFunctionsResponse(device_id, hexMessage.message)
-        const result = getLocation(device_id, userId)
-        console.log(result)
-        console.log(JSON.stringify(hexMessage))
+        repositoryFunctionsResponse({ device_id: device_id }, { hex_location: hexMessage.hex_location })
+        const result = await getLocation(device_id, userId)
         expect(result).toEqual(hexMessage);
     })
 

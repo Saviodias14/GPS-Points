@@ -1,4 +1,4 @@
-import { valuesForFalse, valuesForTrue } from "../constants/valuesBinaryList"
+import { valuesForFalse, valuesForTrue } from "@/constants/valuesBinaryList"
 
 export function valuesCompositionArray(value: string){
     const valuesArray = []

@@ -1,16 +1,16 @@
-import { usersList } from "../constants/users";
-import { lastMessage } from "../constants/serverInformation";
+import { prisma } from "@/database";
 
 
-export function findDeviceId(device_id: string) {
-    for (let i = 0; i < lastMessage.length; i++) {
-        if (lastMessage[i].id === device_id) return lastMessage[i].message
-    }
-    return undefined
+export async function getLocationByDeviceId(device_id: string) {
+    return await prisma.user.findFirst({
+        where: { device_id },
+        select: { hex_location: true }
+    })
 }
 
-export function findDeviceIdByUserId(userId: number) {
-    for (let i = 0; i < usersList.length; i++) {
-        if (usersList[i].id === userId) return usersList[i].device_id
-    }
+export async function getDeviceIdByUserId(userId: number) {
+    return await prisma.user.findUnique({
+        where: { id: userId },
+        select: { device_id: true }
+    })
 }

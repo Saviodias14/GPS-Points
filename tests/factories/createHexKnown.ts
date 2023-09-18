@@ -24,7 +24,7 @@ export function createHexKnown(device_id: string, date: number, direction: numbe
             latitude,
             longitude
         },
-        message
+        hex_location: message
     }
 
     return result

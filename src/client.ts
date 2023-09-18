@@ -1,5 +1,4 @@
 import net from 'net'
-import readLine from 'readline'
 import { serverHost, serverPort } from './constants/serverInformation'
 import { createHex } from './constants/genarateHexadecimal'
 import { usersList } from './constants/users'
@@ -15,7 +14,7 @@ client.connect(serverPort, serverHost, () => {
             client.write(message)
             await new Promise(resolve => setTimeout(resolve, 500));
         }
-    }, 8000);
+    }, (800 * usersList.length));
 
 })
 //client.on('data', (data) => {
