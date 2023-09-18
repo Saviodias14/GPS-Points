@@ -97,3 +97,7 @@ Foram feitos 4 testes:
 - O terceiro simula um usuário tentando acessar um dispositivo que tem o footer e o header incompatíveis com o dispositivo SFT9001.
 
 - E, por último, o quarto teste simula um caso de sucesso, onde o usuário tenta acessar um dispostivo que é dele. Nesse caso, deixei as variáveis que compõem a informação a ser passada pa o usuário em aberto, com a intenção de alterar e verificar casos específicos para podermos observar o comportamento da aplicação.
+Para rodar os testes basta colocar no prompt:
+```bash
+npm run test
+```
