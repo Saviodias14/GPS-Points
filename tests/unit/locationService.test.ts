@@ -8,11 +8,21 @@ describe('Location data processing tests', () => {
 
     const fakeDeviceId = faker.number.hex().padStart(8, '0')
     const fakeUserId = faker.number.int()
+    it('Should not pass if user is not the owner', () => {
+        const userDevice = faker.number.hex().padStart(8, '0')
+        const hexMessage = createHex(fakeDeviceId, '50F7', '73C4')
+
+        repositoryFunctionsResponse(userDevice, hexMessage)
+        const result = () => getLocation(fakeDeviceId, fakeUserId)
+        expect(result).toThrowError('Unauthorized');
+    })
+
     it('Should not pass if the device_id not exist', () => {
         repositoryFunctionsResponse(fakeDeviceId, undefined)
         const result = () => getLocation(fakeDeviceId, fakeUserId)
         expect(result).toThrowError('Device not found');
     })
+
     it('Should not pass if header or footer are wrong', () => {
         const hexMessage = createHex(fakeDeviceId, '0000', '0000')
 
