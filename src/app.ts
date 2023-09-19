@@ -9,7 +9,6 @@ const app = express();
 app
   .use(cors())
   .use(express.json())
-  .get("/health", (req, res) => res.send("OK!"))
   .use(router)
 
 export function init(): Promise<Express> {

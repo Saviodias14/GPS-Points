@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import * as serviceLocation from '@/service/location'
+import * as serviceLocation from '@/service/location.service'
 
 
 export async function getLocation(req: Request, res: Response) {

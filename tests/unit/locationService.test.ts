@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { getLocation } from '../../src/service/location'
+import { getLocation } from '../service/location.service'
 import { createHex } from '../../src/constants/genarateHexadecimal'
 import { createHexKnown } from '../factories/createHexKnown'
 import { repositoryFunctionsResponse } from '../factories/repositoryFunctions'

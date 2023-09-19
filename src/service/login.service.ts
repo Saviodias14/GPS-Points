@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
-import * as loginRepository from '@/repository/login'
+import * as loginRepository from '@/repository/login.repository'
 import bcrypt from 'bcrypt'
 
 dotenv.config()

@@ -1,4 +1,4 @@
-import { createToken } from "@/controller/login";
+import { createToken } from "@/controller/login.controler";
 import { Router } from "express";
 
 

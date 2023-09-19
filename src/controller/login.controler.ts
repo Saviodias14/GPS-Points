@@ -1,4 +1,4 @@
-import { createJwt } from "@/service/login";
+import { createJwt } from "@/service/login.service";
 import e, { Request, Response } from "express";
 import httpStatus from "http-status";
 

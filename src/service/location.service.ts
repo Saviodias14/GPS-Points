@@ -1,5 +1,5 @@
-import * as locationRepository from '@/repository/location'
-import { createInfo } from '@/middleware/createInfo'
+import * as locationRepository from '@/repository/location.repository'
+import { createInfo } from '@/middleware/createInfo.middleware'
 import { footer, header } from '@/constants/headerAndFooter'
 
 export async function getLocation(device_id: string, userId: number) {

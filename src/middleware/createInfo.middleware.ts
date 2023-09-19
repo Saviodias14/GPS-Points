@@ -1,5 +1,5 @@
 import { Location } from "@/protocols"
-import { valuesCompositionArray } from "./valuesComposition"
+import { valuesCompositionArray } from "./valuesComposition.middleware"
 
 function tranformToDecimal(message: string, start: number, end: number) {
     return parseInt(message.slice(start, end), 16)
