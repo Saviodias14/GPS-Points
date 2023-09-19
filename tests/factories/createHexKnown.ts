@@ -1,10 +1,11 @@
-import { createHex } from "../../src/constants/genarateHexadecimal";
-import { valuesForFalse, valuesForTrue } from "../../src/constants/valuesBinaryList";
+import { footer, header } from "@/constants/headerAndFooter";
+import { createHex } from "@/constants/genarateHexadecimal";
+import { valuesForFalse, valuesForTrue } from "@/constants/valuesBinaryList";
 
 export function createHexKnown(device_id: string, date: number, direction: number, distance: number,
     time: number, valuesComposition: string, speed: number, latitude: number, longitude: number) {
 
-    const message = createHex(device_id, '50F7', '73C4', date, direction * 100, distance, time,
+    const message = createHex(device_id, header, footer, date, direction * 100, distance, time,
         valuesComposition, speed, Math.abs(latitude) * 1000000, Math.abs(longitude) * 1000000)
 
     const result = {

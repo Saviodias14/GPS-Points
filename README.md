@@ -1,8 +1,8 @@
 # GPS
-Esse projeto tem o objetivo de tratar um dado em hexadecimal com informações da localização de veículos dos usuários, transformando esse dado em um objeto no formato .json.<br/><br/>
+Esse projeto tem o objetivo de tratar os dados recebidos em hexadecimal com informações da localização de veículos dos usuários, transformando esses dados em objetos no formato .json.<br/><br/>
 Na aplicação foram feitos um server e um client para poder simular a conexão dos dispositivos rastresdores dos veículos com os gateways. Além disso, temos um servidor web onde o usuário recebe as informações tratadas do seu veículo por meio do endpoin GET : api/v1/location/:device_id.<br/><br/>
 <img src="/assets/estruturacao.png" /><br/><br/>
-Os dados que são recebidos dos clients são guardados no banco de dados, onde, posteriormente, serão acessados pela nossa aplicação web.
+Os dados que são recebidos dos clients são guardados no banco de dados, onde, posteriormente, serão acessados pela nossa aplicação web. O banco de dados, a arquitetura da aplicação e as tecnologias utilizadas, foram pensados com foco na escalabilidade do projeto, para facilitar novas implementações de endpoints.
 ## Estrutura de pastas e solução
 No projeto, temos como pasta principal a `src`, onde podemos encontrar:
 
