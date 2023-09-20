@@ -1,9 +1,9 @@
 import net from 'net'
 import { serverHost, serverPort } from './constants/serverInformation'
-import { createHex } from './constants/genarateHexadecimal'
-import { usersList } from './constants/users'
+import { createHex } from './constants/generationTests/genarateHexadecimal'
+import { usersList } from './constants/generationTests/users'
 import { footer, header } from './constants/headerAndFooter'
-import { createPing } from './constants/generatePing'
+import { createPing } from './constants/generationTests/generatePing'
 
 const client = new net.Socket()
 
