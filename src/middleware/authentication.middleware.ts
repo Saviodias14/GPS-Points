@@ -1,3 +1,4 @@
+import { unauthorizedError } from "@/errors/unauthorized.error";
 import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 
@@ -6,7 +7,7 @@ export function authValidation(req: Request, res: Response, next: NextFunction) 
         const token = req.header('Authorization')?.replace('Bearer ', '');
 
         if (!token) {
-            throw new Error();
+            throw unauthorizedError('Unauthorized');
         }
 
 
@@ -14,6 +15,6 @@ export function authValidation(req: Request, res: Response, next: NextFunction) 
         res.locals.userId = data.sub
         next();
     } catch (err) {
-        res.status(401).send('Unauthorized');
+        res.status(err.status).send(err.message);
     }
 };

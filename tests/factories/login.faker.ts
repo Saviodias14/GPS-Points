@@ -9,7 +9,7 @@ export async function fakeUserData(): Promise<User> {
         id: faker.number.int(),
         email: faker.internet.email(),
         password: await bcrypt.hash(faker.internet.password(), 10),
-        device_id: faker.number.hex().padStart(8, '0'),
+        device_id: faker.number.hex().padStart(6, '0'),
         createdAt: faker.date.recent(),
         updatedAt: faker.date.recent()
     }

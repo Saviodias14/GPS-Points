@@ -1,13 +1,8 @@
-import { footer, header } from "@/constants/headerAndFooter";
-import { createHex } from "@/constants/generationTests/genarateHexadecimal";
 import { valuesForFalse, valuesForTrue } from "@/constants/valuesBinaryList";
 import { Decimal } from "@prisma/client/runtime/library";
 
 export function createHexKnown(id: number, device_id: string, date: number, direction: Decimal, distance: number,
     time: number, valuesComposition: string, speed: Decimal, latitude: Decimal, longitude: Decimal) {
-
-    const message = createHex(device_id, header, footer, date, parseInt(direction.toString()) * 100, distance, time,
-        valuesComposition, parseInt(speed.toString()), Math.abs(parseInt(latitude.toString())) * 1000000, Math.abs(parseInt(longitude.toString())) * 1000000)
 
     const result = {
         id,

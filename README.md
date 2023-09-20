@@ -44,16 +44,18 @@ Por fim, temos a pasta tests, que contém os arquivos que testam a aplicação. 
 
 - `Factories`: Contém funçoes que nos ajudam nos testes.
 
-- `Unit`: Contém os testes unitários.
+- `Mocks`: Que guardam funções mockadas usadas nos testes
+
+- `Service`: Contém os testes unitários.
 
 ## Detalhes da solução adotada
 - Essa implementação foi feita dessa forma para solucionar alguns problemas principais, que são: a ausência dos dispositivos rastreadores reais, tratamento dos dados recebidos em hexadecimal, validação do usuário para acessar apenas os dados do seu veículo e armazenamento das informações essenciais.<br/><br/>
-- Assim, foi feita uma simulação que começa com o seed, no qual ele guarda no banco de dados de test os cadastros do usuários (pode ser alterado no arquivo `constants/generationTests/users`) seguindo o modelo existente no `schema.prisma`. Assim, a nossa simulação de client usa esses dados para poder gerar mensagens hexadecimais e enviá-las para o server.Além das mensagens, o client também cria os heartbeats para enviar para o server.
+- Assim, foi feita uma simulação que começa com o seed, no qual ele guarda no banco de dados de teste os cadastros do usuários (pode ser alterado no arquivo `constants/generationTests/users`) seguindo o modelo existente no `schema.prisma`. Assim, a nossa simulação de client usa esses dados para poder gerar mensagens hexadecimais e enviá-las para o server.Além das mensagens, o client também cria os heartbeats para enviar para o server.
 Dessa forma, temos os dados dos veículos dos usuários cadastrados sendo atualizados enquanto o client está online. É importante salientar que esses dados são apenas uma simulação para auxiliar a visualização do funcionamento da api, logo não apresentam informações realmente válidas (são dados falsos) <br/><br/>
 - O próximo passo é criar um token para poder continuar com os testes, pois o usuário só pode ter acesso aos dados do seu próprio veículo. Assim, Podemos pegar o email e a senha do usuário, existentes no  arquivo `users`, e utilizar como corpo para o endpoint `POST /api/v1/login`, que nos retorna um token válido, criado com a biblioteca jsonwebtoken, para aquele usuário. O token guarda a informação do id do usuário para poder acessar as suas informações e verificar se o device_id que será acessado é mesmo do usuário que quer acessá-lo. Assim, garantimos que nenhum dispositivo será acessado por alguém que não é dono dele.
 - Ao finalizar esses passos, podemos colocar o token como headers da requisição (Bearer Token) e acessar a roda `GET /api/v1/location/:device_id` com o device id do usuário. Os casos em que o usuário não pode ou não consegue acessar as informações do seu dispositivo são tratados e reportados, gerando erros de acordo com o protocolo HTTP.
 
-- Observações: A rota de login do usuário foi criada apenas para simular um usuário logado no sistema.
+- Observações: A rota de login do usuário foi criada apenas para simular um usuário logado no sistema. O seed cumpre a função de cadastro dos usuários, com o objetivo único de testar a aplicação principal.
 
 ## Rodando a aplicação (Modo Teste)
 O passo inicial do nosso projeto é criar um `.env.test` para adicionar e configurar as seguintes variáveis de ambiente:
@@ -61,7 +63,8 @@ O passo inicial do nosso projeto é criar um `.env.test` para adicionar e config
 
 - `PORT`: Número da porta do servidor web.
 - `TCP_PORT`: número da porta do servidor TCP.
-- `DATABASE_URL`: O endereço do seu banco de dados postegreSQL no formato `postgresql://<nome-do-usuario>:<senha-do-banco>@<nome-do-servidor>:<porta-do-banco>/<nome-do-banco>?schema=public`.
+- `DATABASE_URL`: O endereço do seu banco de dados postegreSQL no formato `postgresql://<nome-do-usuario>:<senha-do-banco>@<nome-do-servidor>:<porta-do-banco>/<nome-do-banco>?schema=public`.<br/>
+No `.env.example` é possível ver como ficarão as variáveis.
 
 Depois de configurar as variáveis de ambiente você deve instalar as dependencias:
 ```bash

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { usersList } from '../src/constants/users'
+import { usersList } from '../src/constants/generationTests/users'
 import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient()

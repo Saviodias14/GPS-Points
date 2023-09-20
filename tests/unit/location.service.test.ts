@@ -4,6 +4,8 @@ import { createHexKnown } from '../factories/createHexKnown'
 import { repositoryFunctionsResponse } from '../mocks/repositoryFunctions'
 import { Decimal } from '@prisma/client/runtime/library'
 import { fakeDeviceId, fakeLocation, fakeUserId } from '../factories/location.faker'
+import * as locationRepository from '@/repository/location.repository'
+import { Location } from '@prisma/client'
 
 describe('Location data processing tests', () => {
 
@@ -41,12 +43,14 @@ describe('Location data processing tests', () => {
         const latitude = new Decimal(87.654321)
         const longitude = new Decimal(-123.654321)
 
-        const hexMessage = createHexKnown(id, device_id, date, direction, distance, time, valuesComposition,
+        const message = createHexKnown(id, device_id, date, direction, distance, time, valuesComposition,
             speed, latitude, longitude)
 
-        repositoryFunctionsResponse(device_id, hexMessage)
+        repositoryFunctionsResponse(device_id, message)
+
         const result = await getLocation(device_id, userId)
-        expect(result).toEqual(hexMessage);
+        expect(result).toEqual(message);
+
     })
 
 })
