@@ -9,3 +9,10 @@ export type Location = {
     latitude?: number,
     longitude?: number
 }
+
+export type DataInMemory = {
+    email: string;
+    password: string;
+    device_id: string;
+    message?: string[]
+}[]

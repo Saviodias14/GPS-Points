@@ -9,8 +9,15 @@ init().then(() => {
 })
 const server = net.createServer((socket) => {
     console.log("Tracker conected")
-    socket.on('data', async (data) => {
-        await serverService.clientDataStorage(data.toString())
+    socket.on('data', async (bufferData) => {
+        const data = bufferData.toString()
+        const comandType = data.slice(10, 12)
+        if (comandType === '02') {
+            await serverService.clientDataStorage(data)
+        } else if (comandType === '01') {
+            const pingACK = 'I am alive!'
+            socket.write(pingACK)
+        }
     })
 })
 server.listen(serverPort, serverHost, () => {
