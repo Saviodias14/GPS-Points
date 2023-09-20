@@ -8,7 +8,7 @@ export function authValidation(req: Request, res: Response, next: NextFunction) 
         if (!token) {
             throw new Error();
         }
-        
+
 
         const data = jwt.verify(token, process.env.SECRET_KEY);
         res.locals.userId = data.sub

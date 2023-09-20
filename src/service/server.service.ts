@@ -5,5 +5,4 @@ export async function clientDataStorage(data: string) {
     const location = createInfo(data)
 
     await serverRepository.clientDataStorage(location)
-    console.log({ location, data }, data.length)
 }

@@ -1,6 +1,7 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { usersList } from '../src/constants/users'
 import bcrypt from 'bcrypt'
+
 const prisma = new PrismaClient()
 
 async function createUsers() {
@@ -34,12 +35,13 @@ async function main() {
 
     console.log('Registros criados com sucesso.');
 }
-
-main()
-    .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+if (process.env.TEST === 'test') {
+    main()
+        .catch((e) => {
+            console.error(e);
+            process.exit(1);
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
+}

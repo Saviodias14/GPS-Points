@@ -11,5 +11,5 @@ export async function getDeviceIdByUserId(userId: number) {
     const user = await prisma.user.findUnique({
         where: { id: userId }
     })
-    return user.device_id
+    return user?.device_id
 }
