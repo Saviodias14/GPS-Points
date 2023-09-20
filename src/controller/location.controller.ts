@@ -11,8 +11,8 @@ export async function getLocation(req: Request, res: Response) {
         const result = await serviceLocation.getLocation(device_id, userId)
         return res.status(httpStatus.OK).send(result)
     } catch (err) {
-        if (err.message === 'Device not found') return res.sendStatus(httpStatus.NOT_FOUND)
-        if (err.message === 'Unauthorized') return res.sendStatus(httpStatus.UNAUTHORIZED)
+        if (err.neme === 'NotFound') return res.sendStatus(err.status)
+        if (err.message === 'Unauthorized') return res.sendStatus(err.status)
         return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR)
     }
 }

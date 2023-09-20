@@ -13,11 +13,17 @@ const server = net.createServer((socket) => {
     socket.on('data', async (bufferData) => {
         const data = bufferData.toString()
         const comandType = data.slice(10, 12)
-        if (comandType === '02') {
-            await serverService.clientDataStorage(data)
-        } else if (comandType === '01') {
-            const pingACK = 'I am alive!'
-            socket.write(pingACK)
+        try {
+            if (comandType === '02') {
+                await serverService.clientDataStorage(data)
+            } else if (comandType === '01') {
+                const pingACK = 'I am alive!'
+                socket.write(pingACK)
+            }
+        } catch (err) {
+            if(err.name==='BadRequest'){
+                socket.write('Error: ' + err.message);
+            }
         }
     })
 })

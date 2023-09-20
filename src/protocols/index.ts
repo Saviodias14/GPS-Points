@@ -1,3 +1,4 @@
+
 export type Location = {
     device_id: string,
     date?: number,
@@ -16,3 +17,9 @@ export type DataInMemory = {
     device_id: string;
     message?: string[]
 }[]
+
+export type ApplicationError = {
+    name: string;
+    message: string;
+    status: number
+  };
