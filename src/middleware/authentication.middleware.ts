@@ -14,7 +14,6 @@ export function authValidation(req: Request, res: Response, next: NextFunction) 
         res.locals.userId = data.sub
         next();
     } catch (err) {
-        console.log(err)
         res.status(401).send('Unauthorized');
     }
 };

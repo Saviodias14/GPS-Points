@@ -34,7 +34,6 @@ export function createHex(device_id: string, header: string, footer: string,
     const speed = fixedSpeed ? hex(fixedSpeed, 2) : fakeHex(0, 255, 2)
     const latitude = fixedLatitude ? hex(fixedLatitude, 8) : fakeHex(0, 90000000, 8)
     const longitude = fixedLongitude ? hex(fixedLongitude, 8) : fakeHex(0, 180000000, 8)
-    if (parseInt(latitude, 16) > 90000000 || parseInt(longitude, 16) > 180000000) console.log(latitude, longitude)
     const localizationMessage = (header + device_id + localizationType + gpsDate + direction
         + distance + time + valuesComposition + speed + latitude + longitude + footer)
     return localizationMessage.toUpperCase()
