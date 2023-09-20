@@ -27,8 +27,13 @@ Temos dados para a geração das mensagens e do ping em hexadecimal e para o arm
 - `Controller`: Responsável por receber as requisiçoes e enviar as respostas. O arquivo `location` recebe o device_id e o id de cada usuário, chama a função da service e retorna as informações do banco de dados para o usuário. O de `login` recebe email e password, que são enviados pra service, e retorna o token do usuário.
 
 - `Service`: Reponsável pelas regras de negócio. A service do `location`, especificamente, recebe o device_id, confirma se não tem erro nesse dado (device id não é do usuário ou não existe, por exemplo) e depois devolve o dado para o controler. 
+<<<<<<< HEAD
 - Já a service do `login` é responsável por encontrar a senha criptografada do usuário, de acordo com o email que foi passado, comparar essa senha com a senha passada pelo usuário e retornar um token JWT válido para esse usuário caso a senha esteja correta.
 - Por último, temos a service do `server`, que é responsável por descriptografar a mensagem recebida do server e armazená-la no banco de dados como informação de localização.
+=======
+Já a service do `login` é responsável por encontrar a senha criptografada do usuário, de acordo com o email que foi passado, comparar essa senha com a senha passada pelo usuário e retornar um token JWT válido para esse usuário caso a senha esteja correta.<br/>
+Por último, temos a service do `server`, que é responsável por descriptografar a mensagem recebida do server e armazená-la no banco de dados como informação de localização.
+>>>>>>> 6586859... Update README.md
 
 - `Repository`: Responsável por buscar os dados no banco de dados e retornar para a service.
 
