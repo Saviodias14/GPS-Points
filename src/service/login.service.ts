@@ -8,7 +8,7 @@ dotenv.config()
 
 export async function createJwt(email: string, password: string) {
     const user = await loginRepository.getUser(email)
-    if (!user) throw new Error('Email or password invalid')//unauthorizedError('Email or password invalid')
+    if (!user) throw unauthorizedError('Email or password invalid')
     const verifyPassword = bcrypt.compare(password, user.password)
     if (!verifyPassword) throw unauthorizedError('Email or password invalid')
     const { id } = user
