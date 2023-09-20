@@ -8,6 +8,7 @@ export async function getLocation(req: Request, res: Response) {
     const userId = parseInt(res.locals.userId)
     try {
         const result = await serviceLocation.getLocation(device_id, userId)
+        console.log(result)
         return res.status(httpStatus.OK).send(result)
     } catch (err) {
         if (err.message === 'Device not found') return res.sendStatus(httpStatus.NOT_FOUND)

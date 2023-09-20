@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "test": "jest",
+    "test": "jest --coverage",
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
     "dev:client": "nodemon src/client.ts",

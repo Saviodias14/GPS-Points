@@ -1,5 +1,5 @@
 export type Location = {
-    device_id?: string,
+    device_id: string,
     date?: number,
     direction?: number,
     distance?: number,

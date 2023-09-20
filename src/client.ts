@@ -13,9 +13,9 @@ client.connect(serverPort, serverHost, () => {
         for (let i = 0; i < usersList.length; i++) {
             const message = createHex(usersList[i].device_id, header, footer)
             client.write(message)
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise(resolve => setTimeout(resolve, 500));
         }
-    }, (200 * usersList.length));
+    }, (500 * usersList.length));
 
 })
 

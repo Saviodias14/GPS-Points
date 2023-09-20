@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { getLocation } from '../service/location.service'
-import { createHex } from '../../src/constants/genarateHexadecimal'
+import { getLocation } from '@/service/location.service'
+import { createHex } from '@/constants/genarateHexadecimal'
 import { createHexKnown } from '../factories/createHexKnown'
 import { repositoryFunctionsResponse } from '../factories/repositoryFunctions'
 
@@ -8,6 +8,16 @@ describe('Location data processing tests', () => {
 
     const fakeDeviceId = faker.number.hex().padStart(8, '0')
     const fakeUserId = faker.number.int()
+    it('Should not pass if the device_id does not exist', async () => {
+        repositoryFunctionsResponse({ device_id: fakeDeviceId }, undefined)
+
+        try {
+            await getLocation(fakeDeviceId, fakeUserId)
+        } catch (err) {
+            expect(err.message).toEqual('Device not found');
+        }
+    })
+
     it('Should not pass if user is not the owner', async () => {
         const userDevice = faker.number.hex().padStart(8, '0')
         const hexMessage = createHex(fakeDeviceId, '50F7', '73C4')
@@ -17,16 +27,6 @@ describe('Location data processing tests', () => {
             await getLocation(fakeDeviceId, fakeUserId)
         } catch (err) {
             expect(err.message).toEqual('Unauthorized');
-        }
-    })
-
-    it('Should not pass if the device_id does not exist', async () => {
-        repositoryFunctionsResponse({ device_id: fakeDeviceId }, undefined)
-
-        try {
-            await getLocation(fakeDeviceId, fakeUserId)
-        } catch (err) {
-            expect(err.message).toEqual('Device not found');
         }
     })
 

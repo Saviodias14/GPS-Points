@@ -1,7 +1,10 @@
 import { prisma } from "@/database";
+import { Location } from "@/protocols";
 
-export async function clientDataStorage(hex_location: string, device_id: string) {
-    await prisma.user.updateMany({
-        data: { hex_location }, where: { device_id }
-    })
+export async function clientDataStorage(location: Location) {
+    if (location.device_id) {
+        await prisma.location.update({
+            where: { device_id: location.device_id }, data: location
+        })
+    }
 }

@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "locations" ALTER COLUMN "date" SET DEFAULT 0,
+ALTER COLUMN "direction" SET DEFAULT 0,
+ALTER COLUMN "distance" SET DEFAULT 0,
+ALTER COLUMN "time" SET DEFAULT 0,
+ALTER COLUMN "valuesComposition" SET DEFAULT ARRAY['', '', '', '', '']::VARCHAR(255)[],
+ALTER COLUMN "speed" SET DEFAULT 0,
+ALTER COLUMN "latitude" SET DEFAULT 0,
+ALTER COLUMN "longitude" SET DEFAULT 0;

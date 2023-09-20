@@ -2,15 +2,14 @@ import { prisma } from "@/database";
 
 
 export async function getLocationByDeviceId(device_id: string) {
-    return await prisma.user.findFirst({
-        where: { device_id },
-        select: { hex_location: true }
+    return await prisma.location.findFirst({
+        where: { device_id }
     })
 }
 
 export async function getDeviceIdByUserId(userId: number) {
-    return await prisma.user.findUnique({
-        where: { id: userId },
-        select: { device_id: true }
+    const user = await prisma.user.findUnique({
+        where: { id: userId }
     })
+    return user.device_id
 }
