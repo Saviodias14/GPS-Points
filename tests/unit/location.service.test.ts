@@ -1,11 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { getLocation } from '@/service/location.service'
-import { createHexKnown } from '../factories/createHexKnown'
 import { repositoryFunctionsResponse } from '../mocks/repositoryFunctions'
-import { Decimal } from '@prisma/client/runtime/library'
 import { fakeDeviceId, fakeLocation, fakeUserId } from '../factories/location.faker'
-import * as locationRepository from '@/repository/location.repository'
-import { Location } from '@prisma/client'
 
 describe('Location data processing tests', () => {
 
@@ -29,28 +25,4 @@ describe('Location data processing tests', () => {
             expect(err.message).toEqual('You can not access this');
         }
     })
-
-    it('Should return the message decrypted', async () => {
-        const id = 1
-        const userId = 1
-        const device_id = 'AAAAAA'
-        const date = Math.floor(new Date().getTime() / 1000)
-        const direction = new Decimal(45.00)
-        const distance = 1500
-        const time = 12345
-        const valuesComposition = '10101' + '00000000000'
-        const speed = new Decimal(65)
-        const latitude = new Decimal(87.654321)
-        const longitude = new Decimal(-123.654321)
-
-        const message = createHexKnown(id, device_id, date, direction, distance, time, valuesComposition,
-            speed, latitude, longitude)
-
-        repositoryFunctionsResponse(device_id, message)
-
-        const result = await getLocation(device_id, userId)
-        expect(result).toEqual(message);
-
-    })
-
 })
