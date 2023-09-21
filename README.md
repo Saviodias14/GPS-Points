@@ -48,6 +48,8 @@ Por fim, temos a pasta tests, que contém os arquivos que testam a aplicação. 
 
 - `Service`: Contém os testes unitários.
 
+- `Integration`: Contém os testes de integração
+
 ## Detalhes da solução adotada
 - Essa implementação foi feita dessa forma para solucionar alguns problemas principais, que são: a ausência dos dispositivos rastreadores reais, tratamento dos dados recebidos em hexadecimal, validação do usuário para acessar apenas os dados do seu veículo e armazenamento das informações essenciais.<br/><br/>
 - Assim, foi feita uma simulação que começa com o seed, no qual ele guarda no banco de dados de teste os cadastros do usuários (pode ser alterado no arquivo `constants/generationTests/users`) seguindo o modelo existente no `schema.prisma`. Assim, a nossa simulação de client usa esses dados para poder gerar mensagens hexadecimais e enviá-las para o server.Além das mensagens, o client também cria os heartbeats para enviar para o server.
@@ -113,13 +115,28 @@ npm run dev
 Assim os servidores web e TCP já estão no ar e você já pode começar a fazer as suas requisições. É importante lembrar que o banco de dados de desenvolvimento estará vazio e as requisiçoes só vão funcionar se já houver usuários cadastrados no banco.
 
 ## Execução dos testes
-Os testes criados nessa aplicação servem para verificar se as regras de negócio estão sendo cumpridas conforme a documentação passada. Por conta disso, optei por realizar testes unitários que fazem exatamente essa verificação.<br/><br/>
-Foram feitos 3 testes:
-- O primeiro simula um usuário tentando acessar um dispositivo que não é dele.
+Os testes criados nessa aplicação servem para verificar se as regras de negócio estão sendo cumpridas conforme a documentação passada e para verificar os tratamentos de erro. Por conta disso, optei por realizar testes unitários e de integração que fazem exatamente essa verificação.<br/><br/>
+Foram feitos os seguintes testes:
+- Teste unitário que simula um usuário tentando acessar um dispositivo que não é dele.
 
-- O segundo simula um usuário tentando acessar um dispositivo que não existe.
+- Teste unitário que simula um usuário tentando acessar um dispositivo que não existe.
 
-- E, por último, o terceiro teste simula um caso de sucesso, onde o usuário tenta acessar um dispostivo que é dele. Nesse caso, deixei as variáveis que compõem a informação a ser passada para o usuário em aberto, com a intenção de alterar manualmente e verificar casos específicos para podermos observar o comportamento da aplicação. Mas também é possível fazer esse teste automaticamente criando dados aleatórios. Usei a primeira opção com o objetivo de deixar a pessoa que vai executar os testes modificar as informações a serem testadas.
+- Teste de integração que simula um usuário sem o token JWT. Deve retornar statusCode 401.
+
+- Teste de integração que simula um usuário logado tentando acessar um dispositivo que não existe. Deve retornar statusCode 404.
+
+- Teste de integração que simula um usuário logado tentando acessar um dispositivo que não é dele. Deve retornar statusCode 401.
+
+- Teste de integração que simula um caso de sucesso, onde o usuário tenta acessar um dispostivo existente no banco que é dele. Deve retornar status 200.
+
+Além disso, fiz alguns teste unitários para a rota de login:
+
+- Teste unitário que simula um usuário tentando logar com um email incorreto.
+
+- Teste unitário que simula um usuário tentando logar com um email válido, mas com a senha referente aquele email errada.
+
+- Teste unitário que simula um usuário tentando logar com um email e uma senha válidos.
+
 Para rodar os testes basta colocar no prompt:
 ```bash
 npm run test
